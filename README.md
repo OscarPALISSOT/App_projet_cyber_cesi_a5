@@ -1,1 +1,5 @@
-# App_projet_cyber_cesi_a5
+# App pour le projet cyber sécu A5 CESI
+
+## Attribution des ports 
+- Authentification : 3000
+- 
