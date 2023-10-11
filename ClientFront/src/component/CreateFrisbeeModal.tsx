@@ -1,7 +1,11 @@
 import {useState} from "react";
 import axios from "axios";
 
-const CreateFrisbeeModal = () => {
+
+interface CreateFrisbeeModalProps {
+    setFrisbees: (frisbees: any) => void
+}
+const CreateFrisbeeModal = ({setFrisbees}: CreateFrisbeeModalProps) => {
 
     const [modelName, setModelName] = useState('');
     const [pUHT, setPUHT] = useState(0);
@@ -23,6 +27,11 @@ const CreateFrisbeeModal = () => {
             setPUHT(0)
             setGamme('')
             setDescription('')
+            axios.get(import.meta.env.VITE_BACK_HOST + import.meta.env.VITE_URL_MS_FRISBEE + '/getAllFreezeBeeModels').then((response) => {
+                setFrisbees(response.data.response);
+            }).catch((error) => {
+                console.log(error);
+            })
         } catch (error) {
             console.log(error);
         }

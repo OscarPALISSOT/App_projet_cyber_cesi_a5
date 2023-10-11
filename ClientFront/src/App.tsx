@@ -7,16 +7,24 @@ import setAuthTokenHeader from "./modules/SetToken.ts";
 import {IsLogged} from "./modules/IsLogged.ts";
 import FrisbeeTable from "./component/FrisbeeTable.tsx";
 import CreateFrisbeeModal from "./component/CreateFrisbeeModal.tsx";
+import {Frisbee} from "./type/frisbee.ts";
+import axios from "axios";
 
 function App() {
 
     const [isLogged, setIsLogged] = useState(false);
+    const [frisbees, setFrisbees] = useState<Frisbee[]>([]);
 
     useEffect(() => {
         setAuthTokenHeader(localStorage.getItem('JWT_auth_KillerBee'));
         IsLogged().then((logged) => {
             setIsLogged(logged as boolean);
         });
+        axios.get(import.meta.env.VITE_BACK_HOST + import.meta.env.VITE_URL_MS_FRISBEE + '/getAllFreezeBeeModels').then((response) => {
+            setFrisbees(response.data.response);
+        }).catch((error) => {
+            console.log(error);
+        })
     }, []);
 
 
@@ -30,12 +38,10 @@ function App() {
             setIsLogged={setIsLogged}
         />
         <RegisterModal/>
-        <CreateFrisbeeModal/>
+        <CreateFrisbeeModal setFrisbees={setFrisbees}/>
         <div className="container pt-4">
             <button type="button" className="btn btn-outline-warning mb-4" data-bs-toggle="modal" data-bs-target="#create">Ajouter un frisbee</button>
-            <FrisbeeTable
-
-            />
+            <FrisbeeTable frisbees={frisbees}/>
         </div>
     </>
   )

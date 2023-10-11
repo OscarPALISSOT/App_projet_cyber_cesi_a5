@@ -1,11 +1,17 @@
-const FrisbeeRow = () => {
+import {Frisbee} from "../type/frisbee.ts";
+
+interface FrisbeeRowProps {
+    frisbee: Frisbee
+}
+
+const FrisbeeRow = ({frisbee}: FrisbeeRowProps) => {
     return (
         <>
             <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
+                <td>{frisbee.ModelName}</td>
+                <td>{frisbee.pUHT}</td>
+                <td>{frisbee.Gamme}</td>
+                <td>{frisbee.Description}</td>
             </tr>
         </>
     )
