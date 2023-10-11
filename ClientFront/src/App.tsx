@@ -41,7 +41,7 @@ function App() {
         <CreateFrisbeeModal setFrisbees={setFrisbees}/>
         <div className="container pt-4">
             <button type="button" className="btn btn-outline-warning mb-4" data-bs-toggle="modal" data-bs-target="#create">Ajouter un frisbee</button>
-            <FrisbeeTable frisbees={frisbees}/>
+            <FrisbeeTable frisbees={frisbees} setFrisbees={setFrisbees}/>
         </div>
     </>
   )

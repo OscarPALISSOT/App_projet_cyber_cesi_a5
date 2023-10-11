@@ -1,5 +1,5 @@
 export type Frisbee = {
-    ModelID?: number;
+    ModelID: number;
     ModelName: string;
     pUHT: number;
     Gamme: string;

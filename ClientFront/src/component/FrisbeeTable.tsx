@@ -3,9 +3,10 @@ import FrisbeeRow from "./FrisbeeRow.tsx";
 
 interface FrisbeeTableProps {
     frisbees: Frisbee[]
+    setFrisbees: (frisbees: any) => void
 }
 
-const FrisbeeTable = ({frisbees}: FrisbeeTableProps) => {
+const FrisbeeTable = ({frisbees, setFrisbees}: FrisbeeTableProps) => {
     return (
         <>
             <table className="table table-striped">
@@ -15,6 +16,7 @@ const FrisbeeTable = ({frisbees}: FrisbeeTableProps) => {
                     <th scope="col">Price</th>
                     <th scope="col">Gamme</th>
                     <th scope="col">Description</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -23,6 +25,7 @@ const FrisbeeTable = ({frisbees}: FrisbeeTableProps) => {
                         <FrisbeeRow
                             key={index}
                             frisbee={frisbee}
+                            setFrisbees={setFrisbees}
                         />
                     )
                 })}
