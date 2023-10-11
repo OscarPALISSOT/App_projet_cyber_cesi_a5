@@ -28,13 +28,13 @@ router.get('/getAllFreezeBeeModels', async (req, res, next) => {
  * Crée un nouveau modèle FreezeBee.
  */
 router.post('/createFreezeBeeModel', async (req, res, next) => {
-  const { ModelName, pUHT, Gamme, Description } = req.query;
+  const { modelName, pUHT, gamme, description } = req.query;
 
   const newModel: FreezeBeeModel = {
-    ModelName: ModelName as string,
+    ModelName: modelName as string,
     pUHT: parseFloat(pUHT as string),
-    Gamme: Gamme as string,
-    Description: Description as string,
+    Gamme: gamme as string,
+    Description: description as string,
   };
 
   try {

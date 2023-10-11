@@ -11,84 +11,9 @@ datasource db {
 }
 
 model FreezeBeeModel {
-  ModelID     Int          @id @default(autoincrement())
+  ModelID     Int    @id @default(autoincrement())
   ModelName   String
   pUHT        Float
   Gamme       String
   Description String
-  estcompose  estcompose[]
-  utilise     utilise[]
-}
-
-model Ingredient {
-  IngredientID   Int          @id @default(autoincrement())
-  IngredientName String
-  Description    String
-  estcompose     estcompose[]
-}
-
-model ManufacturingProcess {
-  ProcessID   Int          @id @default(autoincrement())
-  ProcessName String
-  Description String
-  utilise     utilise[]
-  faitpartie  faitpartie[]
-  valide      valide[]
-}
-
-model ManufacturingStep {
-  StepID      Int          @id @default(autoincrement())
-  StepName    String
-  Description String
-  faitpartie  faitpartie[]
-}
-
-model Test {
-  TestID      Int      @id @default(autoincrement())
-  TestName    String
-  Description String
-  valide      valide[]
-}
-
-model estcompose {
-  IngredientID Int
-  ModelID      Int
-  Grammage     Float
-
-  Ingredient     Ingredient     @relation(fields: [IngredientID], references: [IngredientID], onDelete: Cascade)
-  FreezeBeeModel FreezeBeeModel @relation(fields: [ModelID], references: [ModelID], onDelete: Cascade)
-
-  @@id([IngredientID, ModelID])
-}
-
-model utilise {
-  ModelID   Int
-  ProcessID Int
-
-  FreezeBeeModel       FreezeBeeModel       @relation(fields: [ModelID], references: [ModelID], onDelete: Cascade)
-  ManufacturingProcess ManufacturingProcess @relation(fields: [ProcessID], references: [ProcessID], onDelete: Cascade)
-
-  @@id([ModelID, ProcessID])
-}
-
-model faitpartie {
-  StepID     Int
-  ProcessID  Int
-  StepNumber Int
-
-  ManufacturingStep    ManufacturingStep    @relation(fields: [StepID], references: [StepID], onDelete: Cascade)
-  ManufacturingProcess ManufacturingProcess @relation(fields: [ProcessID], references: [ProcessID], onDelete: Cascade)
-
-  @@id([StepID, ProcessID])
-}
-
-model valide {
-  ProcessID    Int
-  TestID       Int
-  ValideOuiNon Boolean
-
-  ManufacturingProcess ManufacturingProcess @relation(fields: [ProcessID], references: [ProcessID], onDelete: Cascade)
-  Test                 Test                 @relation(fields: [TestID], references: [TestID], onDelete: Cascade)
-
-  @@id([ProcessID, TestID])
 }
