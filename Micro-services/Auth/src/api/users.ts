@@ -131,13 +131,14 @@ router.patch('/updateUserPassword', async function (req, res, next) {
  */
 router.post('/checkUserPassword', async function (req, res, next) {
   const { username, password } = req.query;
-  const hashPwd = await GetUserPassword(username as string);
-  const comparePwd = await comparePassword(password as string, hashPwd?.Password as string);
   try {
+    const hashPwd = await GetUserPassword(username as string);
+    const comparePwd = await comparePassword(password as string, hashPwd?.Password as string);
     if (!comparePwd) {
       res.status(401).json({ error: 'Password is not correct' });
+    } else {
+      res.status(200).json({ response: 'Password is correct' });
     }
-    res.status(200).json({ response: 'Password is correct' });
   } catch (error) {
     res.status(500).json({ error: error });
   }
