@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import { checkJWT } from '../modules/jwt';
-import { JwtPayload } from 'jsonwebtoken';
 
 
 export function tokenMiddleware(req: Request, res: Response, next: NextFunction) {

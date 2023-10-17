@@ -1,14 +1,12 @@
 FROM node:18
 # Create app directory
-WORKDIR /authApp
+WORKDIR /clientFrontApp
 
 COPY package*.json ./
-COPY prisma ./prisma/
 RUN npm install
-
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 5173
 
-CMD npm run start:prod
+CMD npm run dev
