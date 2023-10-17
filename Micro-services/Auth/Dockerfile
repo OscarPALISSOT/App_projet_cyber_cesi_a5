@@ -3,12 +3,12 @@ FROM node:18
 WORKDIR /authApp
 
 COPY package*.json ./
-COPY prisma ./prisma/
 RUN npm install
-
+COPY push-and-start.sh .
+RUN chmod +x push-and-start.sh
 
 COPY . .
 
 EXPOSE 3000
 
-CMD npm run start:prod
+CMD ["./push-and-start.sh"]

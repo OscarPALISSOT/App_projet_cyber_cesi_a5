@@ -8,11 +8,11 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=$DB_PASSWORD_AUTH
       - MYSQL_DATABASE=$DB_NAME_AUTH
-      - MYSQL_ROOT_HOST= '%'
+      - MYSQL_ROOT_HOST=%
     ports:
       - $DB_PORT_AUTH:3306
     volumes:
-      - db:/var/lib/mysql
+      - dbauth:/var/lib/mysql
 
   frisbeedb:
     image: mysql:5.7
@@ -21,22 +21,22 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=$DB_PASSWORD_FRISBEE
       - MYSQL_DATABASE=$DB_NAME_FRISBEE
-      - MYSQL_ROOT_HOST= '%'
+      - MYSQL_ROOT_HOST=%
     ports:
       - $DB_PORT_FRISBEE:3306
     volumes:
-      - db:/var/lib/mysql
+      - dbfrisbee:/var/lib/mysql
 
   auth:
     depends_on:
       - authdb
     build: Micro-services/Auth
     restart: unless-stopped
-    env_file: Micro-services/Auth/.env
+    env_file: .env
     ports:
       - 3000:3000
     environment:
-      - DB_HOST=$DB_HOST_AUTH
+      - DB_HOST=authdb
       - DB_USER=$DB_USER_AUTH
       - DB_PASSWORD=$DB_PASSWORD_AUTH
       - DB_NAME=$DB_NAME_AUTH
@@ -53,7 +53,7 @@ services:
     ports:
       - 3001:3001
     environment:
-      - DB_HOST=$DB_HOST_FRISBEE
+      - DB_HOST=frisbeedb
       - DB_USER=$DB_USER_FRISBEE
       - DB_PASSWORD=$DB_PASSWORD_FRISBEE
       - DB_NAME=$DB_NAME_FRISBEE
@@ -73,4 +73,5 @@ services:
     tty: true
 
 volumes:
-  db:
+  dbauth:
+  dbfrisbee:
