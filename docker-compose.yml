@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  reverse-proxy:
+    container_name: reverse-proxy
+    image: nginx
+    volumes:
+      - /etc/letsencrypt/:/etc/letsencrypt/
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+      - 443:443
+
   authdb:
     image: mysql:5.7
     restart: unless-stopped
@@ -30,6 +40,7 @@ services:
   auth:
     depends_on:
       - authdb
+      - reverse-proxy
     build: Micro-services/Auth
     restart: unless-stopped
     env_file: .env
@@ -47,6 +58,7 @@ services:
   frisbee:
     depends_on:
       - frisbeedb
+      - reverse-proxy
     build: Micro-services/Frisbee
     restart: unless-stopped
     env_file: .env
@@ -65,6 +77,7 @@ services:
     depends_on:
       - frisbee
       - auth
+      - reverse-proxy
     build: ClientFront
     restart: unless-stopped
     ports:

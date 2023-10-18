@@ -15,7 +15,7 @@ const CreateFrisbeeModal = ({setFrisbees}: CreateFrisbeeModalProps) => {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
         try {
-            await axios.post(import.meta.env.VITE_BACK_HOST + import.meta.env.VITE_URL_MS_FRISBEE + '/createFreezeBeeModel', null, {
+            await axios.post(import.meta.env.VITE_URL_MS_FRISBEE + '/createFreezeBeeModel', null, {
                 params: {
                     modelName: modelName,
                     pUHT: pUHT,
@@ -27,7 +27,7 @@ const CreateFrisbeeModal = ({setFrisbees}: CreateFrisbeeModalProps) => {
             setPUHT(0)
             setGamme('')
             setDescription('')
-            axios.get(import.meta.env.VITE_BACK_HOST + import.meta.env.VITE_URL_MS_FRISBEE + '/getAllFreezeBeeModels').then((response) => {
+            axios.get(import.meta.env.VITE_URL_MS_FRISBEE + '/getAllFreezeBeeModels').then((response) => {
                 setFrisbees(response.data.response);
             }).catch((error) => {
                 console.log(error);

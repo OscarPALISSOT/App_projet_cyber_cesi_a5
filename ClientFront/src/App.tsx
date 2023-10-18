@@ -20,7 +20,7 @@ function App() {
         IsLogged().then((logged) => {
             setIsLogged(logged as boolean);
         });
-        axios.get(import.meta.env.VITE_BACK_HOST + import.meta.env.VITE_URL_MS_FRISBEE + '/getAllFreezeBeeModels').then((response) => {
+        axios.get(import.meta.env.VITE_URL_MS_FRISBEE + '/getAllFreezeBeeModels').then((response) => {
             setFrisbees(response.data.response);
         }).catch((error) => {
             console.log(error);

@@ -11,7 +11,7 @@ const RegisterModal = () => {
         if (username === '' || password === '') {
             return
         }
-        axios.post(import.meta.env.VITE_BACK_HOST + import.meta.env.VITE_URL_MS_USER + '/create',
+        axios.post(import.meta.env.VITE_URL_MS_USER + '/create',
             null,{
                 params: {
                     username: username,

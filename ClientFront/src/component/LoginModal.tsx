@@ -16,23 +16,23 @@ const LoginModal = ({setIsLogged}: LoginModalProps) => {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
         try {
-            const user = (await axios.get(import.meta.env.VITE_BACK_HOST + import.meta.env.VITE_URL_MS_USER + '/getUser', {params: {username: username}})).data.response
+            const user = (await axios.get(import.meta.env.VITE_URL_MS_USER + '/getUser', {params: {username: username}})).data.response
             if (!user) {
                 setIncorrectEmail(true)
             } else {
-                await axios.post(import.meta.env.VITE_BACK_HOST + import.meta.env.VITE_URL_MS_USER + '/checkUserPassword', null, {
+                await axios.post(import.meta.env.VITE_URL_MS_USER + '/checkUserPassword', null, {
                     params: {
                         username: username,
                         password: password
                     }
                 })
-                const token = (await axios.post(import.meta.env.VITE_BACK_HOST + import.meta.env.VITE_URL_MS_AUTH + '/create', null, {
+                const token = (await axios.post(import.meta.env.VITE_URL_MS_AUTH + '/create', null, {
                     params: {
                         userId: user.UserId,
                         username: username,
                     }
                 })).data.token
-                await axios.post(import.meta.env.VITE_BACK_HOST + import.meta.env.VITE_URL_MS_USER + '/addTokenToUser', null, {
+                await axios.post(import.meta.env.VITE_URL_MS_USER + '/addTokenToUser', null, {
                     params: {
                         username: username,
                         token: token
