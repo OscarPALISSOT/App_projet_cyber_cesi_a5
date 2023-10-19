@@ -5,7 +5,7 @@ services:
     container_name: reverse-proxy
     image: nginx
     volumes:
-      - ./ssl/:/etc/letsencrypt/
+      - ./ssl/:/etc/openSLL/
       - ./nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
